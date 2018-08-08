@@ -11,8 +11,13 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'junegunn/goyo.vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'altercation/vim-colors-solarized'
 call vundle#end()
 filetype indent plugin on
+
+"auto-pairs
+let g:AutoPairsFlyMode = 1  
+let g:AutoPairsShortcutBackInsert = '<C-b>'
 
 "line length and numbering
 set textwidth=80
@@ -24,5 +29,7 @@ set tabstop=2
 set shiftwidth=2
 set autoindent
 
-"enable color 
-syntax on
+"aesethetic
+syntax enable 
+set background=dark
+colorscheme solarized
