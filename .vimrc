@@ -22,6 +22,7 @@ let g:AutoPairsShortcutBackInsert = '<C-b>'
 "line length and numbering
 set textwidth=80
 set number
+set fo-=l
 
 "4-space tabs and indents 
 set expandtab 
