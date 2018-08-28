@@ -18,7 +18,7 @@ if [[ "$yn" == [Yy] ]] ;
   echo "${green}installing and configuring tslint..${reset}"
   npm install tslint --save-dev
   jq .tslint ~/.scripts/init/config.json > tslint.json
-  
+
   echo "${green}injecting scripts into package.json..${reset}"
   jq -s '.[0] * .[1].package' package.json ~/.scripts/init/config.json > tmp.json
   cat tmp.json >| package.json && rm tmp.json 

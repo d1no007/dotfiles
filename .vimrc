@@ -12,15 +12,19 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'junegunn/goyo.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'gsiano/vmux-clipboard'
 call vundle#end()
 filetype indent plugin on
 
+"compiler settings for leafgarland/typescript-vim
+let g:typescript_compiler_binary='./node_modules/typescript/bin/tsc'
+
 "auto-pairs
-let g:AutoPairsFlyMode = 1  
-let g:AutoPairsShortcutBackInsert = '<C-b>'
+let g:AutoPairsFlyMode=1  
+let g:AutoPairsShortcutBackInsert='<C-b>'
 
 "line length and numbering
-set textwidth=80
+set textwidth=120 
 set number
 set fo-=l
 
@@ -32,5 +36,13 @@ set autoindent
 
 "aesethetic
 syntax enable 
-set background=dark
+set background=light
 colorscheme solarized
+
+"remove trailing whitespace
+fun! TrimWhitespace()
+    let l:save=winsaveview()
+    %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()

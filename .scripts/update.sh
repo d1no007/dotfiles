@@ -18,3 +18,4 @@ brew doctor
 # node 
 echo "${green}updating node and npm along with packages..${reset}"
 nvm install-latest-npm
+nvm use default
