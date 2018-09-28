@@ -13,8 +13,13 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'gsiano/vmux-clipboard'
+Plugin 'hashivim/vim-terraform'
+Plugin 'ekalinin/Dockerfile.vim'
 call vundle#end()
 filetype indent plugin on
+
+"terraform syntax
+let g:terraform_align=1
 
 "compiler settings for leafgarland/typescript-vim
 let g:typescript_compiler_binary='./node_modules/typescript/bin/tsc'
@@ -34,7 +39,7 @@ set tabstop=2
 set shiftwidth=2
 set autoindent
 
-"aesethetic
+"aesthetic
 syntax enable 
 set background=light
 colorscheme solarized

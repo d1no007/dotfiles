@@ -6,6 +6,8 @@
 	<false/>
 	<key>AllowClipboardAccess</key>
 	<true/>
+	<key>AlternateMouseScroll</key>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -775,13 +777,13 @@
 		</array>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>180 1354 445 95 -426 1050 2560 1417 </string>
+	<string>180 1238 445 77 -426 1050 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>490 321 700 622 0 0 1680 1050 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 136 606 469 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>518 2071 918 394 -426 1050 2560 1417 </string>
+	<string>501 1621 796 486 -101 1050 1920 1057 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>152 436 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame com.apple.typography_panel_Menlo-Regular</key>
@@ -2317,7 +2319,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-08-24T05:37:11Z</date>
+	<date>2018-09-24T18:07:38Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -2345,7 +2347,7 @@
 		<string>Profiles</string>
 	</array>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1534832384</real>
+	<real>1535222144</real>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseLionStyleFullscreen</key>
