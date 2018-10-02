@@ -15,6 +15,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'gsiano/vmux-clipboard'
 Plugin 'hashivim/vim-terraform'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'avakhov/vim-yaml'
 call vundle#end()
 filetype indent plugin on
 
@@ -51,3 +52,6 @@ fun! TrimWhitespace()
     call winrestview(l:save)
 endfun
 command! TrimWhitespace call TrimWhitespace()
+
+"2-space YAML
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
