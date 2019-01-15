@@ -16,8 +16,13 @@ Plugin 'gsiano/vmux-clipboard'
 Plugin 'hashivim/vim-terraform'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'avakhov/vim-yaml'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 call vundle#end()
 filetype indent plugin on
+
+"ripgrep find
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 "terraform syntax
 let g:terraform_align=1
@@ -33,6 +38,9 @@ let g:AutoPairsShortcutBackInsert='<C-b>'
 set textwidth=120 
 set number
 set fo-=l
+
+"wrap markdown
+au BufRead,BufNewFile *.md setlocal textwidth=120
 
 "4-space tabs and indents 
 set expandtab 
