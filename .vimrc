@@ -52,7 +52,7 @@ set autoindent
 
 "aesthetic
 syntax enable 
-set background=light
+set background=dark
 colorscheme solarized
 
 "remove trailing whitespace
