@@ -1,7 +1,6 @@
 #!/bin/zsh
 
-# source scripts
-. ~/.zshrc
+source ~/.zshrc
 
 # colors
 green=`tput setaf 2`
