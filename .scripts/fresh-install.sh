@@ -12,6 +12,8 @@ then
   brew install cask
   brew install kubernetes-cli 
   brew install vim
+  brew install jq
+  brew install sox
 fi
 
 # brew - apps 
@@ -23,6 +25,7 @@ then
   brew cask install spectacle
   brew cask install docker
   brew cask install google-cloud-sdk
+  brew cask install keyboard-maestro
   brew cask install postman
   brew cask install boostnote
   brew cask install slack
@@ -70,4 +73,11 @@ then
 
   nvm install-latest-npm
   nvm use default
+
+  read -n "yn?install global npm packages(y/n)? "
+  if [[ "$yn" == [Yy] ]] ;
+  then
+    npm install wscat
+    npm install ilp-spsp
+  fi
 fi
