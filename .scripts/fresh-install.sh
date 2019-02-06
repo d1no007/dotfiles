@@ -23,8 +23,10 @@ then
   brew cask install spectacle
   brew cask install docker
   brew cask install google-cloud-sdk
+  brew cask install postman
   brew cask install boostnote
   brew cask install slack
+  brew cask intall notion
   brew cask install dropbox 
   brew cask install spotify
 fi
