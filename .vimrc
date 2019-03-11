@@ -52,8 +52,7 @@ set autoindent
 
 "aesthetic
 syntax enable 
-set background=dark
-colorscheme solarized
+colorscheme default
 
 "remove trailing whitespace
 fun! TrimWhitespace()

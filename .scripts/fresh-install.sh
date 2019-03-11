@@ -14,6 +14,13 @@ then
   brew install vim
   brew install jq
   brew install sox
+  brew install yarn
+  # envsubst -- to substitute for vars for environment
+  brew install gettext
+  brew link --force gettext
+  # fuzzy finding + key bindings
+  brew install fzf
+  $(brew --prefix)/opt/fzf/install
 fi
 
 # brew - apps 
@@ -25,7 +32,6 @@ then
   brew cask install spectacle
   brew cask install docker
   brew cask install google-cloud-sdk
-  brew cask install keyboard-maestro
   brew cask install postman
   brew cask install boostnote
   brew cask install slack
@@ -62,7 +68,7 @@ then
 fi
 
 # node
-read -n "yn?install nvm/npm/node(y/n)? "
+read -n "yn?install nvm/node(y/n)? "
 if [[ "$yn" == [Yy] ]] ;
 then
   curl https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | zsh 
@@ -71,13 +77,9 @@ then
   nvm install node
   nvm use node
 
-  nvm install-latest-npm
-  nvm use default
-
-  read -n "yn?install global npm packages(y/n)? "
+  read -n "yn?install global packages(y/n)? "
   if [[ "$yn" == [Yy] ]] ;
   then
-    npm install wscat
-    npm install ilp-spsp
+    yarn global add wscat ilp-spsp moneyd-gui
   fi
 fi
