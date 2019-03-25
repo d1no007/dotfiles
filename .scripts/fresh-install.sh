@@ -10,11 +10,14 @@ then
 
   brew install git
   brew install cask
-  brew install kubernetes-cli 
   brew install vim
   brew install jq
   brew install sox
   brew install yarn
+  brew install redis
+  # kuberenetes
+  brew install kubernetes-cli 
+  brew install kubernetes-helm
   # envsubst -- to substitute for vars for environment
   brew install gettext
   brew link --force gettext

@@ -16,6 +16,7 @@ Plugin 'gsiano/vmux-clipboard'
 Plugin 'hashivim/vim-terraform'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'avakhov/vim-yaml'
+Plugin 'junegunn/fzf.vim'
 call vundle#end()
 filetype indent plugin on
 
@@ -40,6 +41,9 @@ let g:AutoPairsShortcutBackInsert='<C-b>'
 set textwidth=80
 set number
 set fo-=l
+
+" scroll when there are 10 rows before bottom or top of screen
+set scrolloff=10
 
 "wrap markdown
 au BufRead,BufNewFile *.md setlocal textwidth=120
