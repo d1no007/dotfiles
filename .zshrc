@@ -1,24 +1,47 @@
 #
-# Executes commands at the start of an interactive session
+# Executes commands at the start of an interactive session.
 #
 
+### Prezto
 # source prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+### Plugins
+# source plugin manager
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# zplugin plugins
+zplug "greymd/docker-zsh-completion"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "lukechilds/zsh-better-npm-completion"
+zplug "glidenote/hub-zsh-completion"
+zplug "nnao45/zsh-kubectl-completion"
+
+# install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# source plugins and add commands to $PATH
+zplug load --verbose
+
+# history substring keybindings
+KEYTIMEOUT=1
+bindkey -v
+if zplug check zsh-users/zsh-history-substring-search; then
+    bindkey '\eOA' history-substring-search-up
+    bindkey '\eOB' history-substring-search-down
+fi
+
 ### Aliases/Commands
-# directories
-alias strata='cd ~/dev/strata'
-alias interledger='cd ~/dev/interledger'
-
-# dotfiles
-alias dot='git --git-dir=/Users/dino/.dot/ --work-tree=/Users/dino'
-
-# gcloud
-alias gcloud-set-cluster='gcloud container clusters get-credentials'
-alias gcloud-set-auth='gcloud auth application-default login'
-alias gcloud-set-auth-docker='gcloud auth configure-docker'
+# dotfiles (git alias)
+alias dot='/usr/bin/git --git-dir=$HOME/.dot/ --work-tree=$HOME'
 
 # git
 alias gs='git status'
@@ -37,9 +60,7 @@ alias gcl='git clone'
 alias gch='git checkout'
 alias gchb='git checkout -b'
 alias grp='git remote prune origin'
-
-# ls 
-alias la='ls -la'
+alias gb='git branch'
 
 # kubernetes
 alias k='kubectl'
@@ -51,7 +72,7 @@ alias kc='kubectl config current-context'
 alias kx='kc | cut -d "_" -f 4'
 alias ku='kubectl config use-context'
 
-# kubernetes switch context
+# kubernetes (switch context)
 ks() {
   if [[ $(kx) == "prod" ]] ; then
     ku $(kc | cut -d "_" -f 1-3)_staging
@@ -59,6 +80,9 @@ ks() {
     ku $(kc | cut -d "_" -f 1-3)_prod
   fi
 }
+
+# ls 
+alias la='ls -la'
 
 # render markdown to browser
 rndr-md() { 
@@ -94,7 +118,7 @@ tx3() {
   tmux -2 attach-session -d; 
 }
 
-# typescript dev env
+# typescript development set up 
 ts-init() {
   # new session with 'main' pane
   tn $1 -d -n main -d
@@ -124,9 +148,9 @@ alias timestamp='date -u "+%Y-%m-%dT%H:%M:%S"'
 alias vinstall='vim +PluginInstall +qall'
 alias v='vim'
 
-### Completions
-# hydra scripts
-export TS_CONFIG_PATH="$HOME/dev/strata/scripts/init/config.json"
+### Completion and PATH
+# hydra
+export TS_CONFIG_PATH="$HOME/Code/hydra/scripts/init/config.json"
 
 # rust
 fpath+=~/.zfunc
@@ -167,3 +191,41 @@ export PATH="/usr/local/opt/curl/bin:$PATH"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='--no-height --no-reverse'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pm2
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
+
+if type complete &>/dev/null; then
+  _pm2_completion () {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           pm2 completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -o default -F _pm2_completion pm2
+elif type compctl &>/dev/null; then
+  _pm2_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       pm2 completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _pm2_completion + -f + pm2
+fi
+
+# iterm shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

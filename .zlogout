@@ -1,9 +1,9 @@
 #
-# executes commands at logout
+# Executes commands at logout.
 #
 
 # print the message
 cat <<-EOF
 
-Peace, Dean.
+Bye Dino!
 EOF

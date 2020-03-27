@@ -1,4 +1,7 @@
 #!/bin/zsh
+# 
+# Fresh install script for basic dev apps (and mac apps).
+#
 
 cd $HOME 
 
@@ -14,7 +17,9 @@ then
   brew install jq
   brew install sox
   brew install yarn
+  brew install rg
   brew install redis
+  brew install zplug 
   # kuberenetes
   brew install kubernetes-cli 
   brew install kubernetes-helm
@@ -36,10 +41,8 @@ then
   brew cask install docker
   brew cask install google-cloud-sdk
   brew cask install postman
-  brew cask install boostnote
   brew cask install slack
   brew cask intall notion
-  brew cask install dropbox 
   brew cask install spotify
 fi
 
@@ -48,7 +51,7 @@ read -n "yn?install dotfiles(y/n)? "
 if [[ "$yn" == [Yy] ]] ;
 then
   echo ".dot" >> .gitignore
-  git clone --bare git@github.com:d1no007/dotfiles.git $HOME/.dot
+  git clone --bare git@github.com:dino-rodriguez/dotfiles.git $HOME/.dot
 
   dot="/usr/bin/git --git-dir=$HOME/.dot/ --work-tree=$HOME"
   $dot checkout .
@@ -63,7 +66,7 @@ if [[ "$yn" == [Yy] ]] ;
 then
   chsh -s /bin/zsh
 
-  git clone --recursive git@github.com:d1no007/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+  git clone --recursive git@github.com:dino-rodriguez/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
   setopt EXTENDED_GLOB
   for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
     ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
@@ -83,6 +86,7 @@ then
   read -n "yn?install global packages(y/n)? "
   if [[ "$yn" == [Yy] ]] ;
   then
-    yarn global add wscat ilp-spsp moneyd-gui
+    yarn global add wscat typescript pm2
+    pm2 completion install
   fi
 fi

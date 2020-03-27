@@ -1,4 +1,7 @@
 #!/bin/zsh
+# 
+# Update cli packages.
+#
 
 source ~/.zshrc
 

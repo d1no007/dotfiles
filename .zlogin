@@ -1,5 +1,5 @@
 #
-# executes commands at login post-zshrc
+# Executes commands at login post-zshrc.
 #
 
 # execute code that does not affect the current session in the background

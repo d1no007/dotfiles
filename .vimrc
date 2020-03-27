@@ -42,7 +42,7 @@ set textwidth=80
 set number
 set fo-=l
 
-" scroll when there are 10 rows before bottom or top of screen
+"scroll when there are 10 rows before bottom or top of screen
 set scrolloff=10
 
 "wrap markdown

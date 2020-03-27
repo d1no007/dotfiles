@@ -1,5 +1,5 @@
 #
-# defines environment variables
+# Defines environment variables.
 #
 
 # ensure that a non-login, non-interactive shell has a defined environment
