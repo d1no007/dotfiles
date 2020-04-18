@@ -20,6 +20,7 @@ then
   brew install rg
   brew install redis
   brew install zplug 
+  brew install hub
   # kuberenetes
   brew install kubernetes-cli 
   brew install kubernetes-helm

@@ -17,6 +17,7 @@ Plugin 'hashivim/vim-terraform'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'avakhov/vim-yaml'
 Plugin 'junegunn/fzf.vim'
+Plugin 'prettier/vim-prettier'
 call vundle#end()
 filetype indent plugin on
 
