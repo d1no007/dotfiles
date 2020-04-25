@@ -10,34 +10,17 @@ fi
 
 ### Plugins
 # source plugin manager
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+export ANTIGEN_HOME=$HOME/.antigen/antigen.zsh
+source $ANTIGEN_HOME 
 
-# zplugin plugins
-zplug "greymd/docker-zsh-completion"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "lukechilds/zsh-better-npm-completion"
-zplug "glidenote/hub-zsh-completion"
-zplug "nnao45/zsh-kubectl-completion"
+# plugins
+antigen bundle "greymd/docker-zsh-completion"
+antigen bundle "zsh-users/zsh-history-substring-search"
+antigen bundle "lukechilds/zsh-better-npm-completion"
+antigen bundle "glidenote/hub-zsh-completion"
+antigen bundle "nnao45/zsh-kubectl-completion"
 
-# install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# source plugins and add commands to $PATH
-zplug load --verbose
-
-# history substring keybindings
-KEYTIMEOUT=1
-bindkey -v
-if zplug check zsh-users/zsh-history-substring-search; then
-    bindkey '\eOA' history-substring-search-up
-    bindkey '\eOB' history-substring-search-down
-fi
+antigen apply
 
 ### Aliases/Commands
 # dotfiles (git alias)
