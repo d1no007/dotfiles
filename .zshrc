@@ -33,7 +33,7 @@ alias gc='git commit'
 alias gca='git commit --amend'
 alias gcan='git commit --amend --no-edit'
 alias gpsh='git push'
-alias gpshu='git push --set-upstream origin'
+alias gpshu='git push --set-upstream origin HEAD'
 alias gpl='git pull'
 alias gplr='git pull --rebase'
 alias ga='git add'
@@ -101,26 +101,38 @@ tx3() {
   tmux -2 attach-session -d; 
 }
 
-# typescript development set up 
+# Adapted from : http://ryan.himmelwright.net/post/scripting-tmux-workspaces/
+# Typescript development set up
 ts-init() {
-  # new session with 'main' pane
-  tn $1 -d -n main -d
+  # set session name
+  SESSION=$1
+  SESSIONEXISTS=$(tmux list-sessions | grep $SESSION)
 
-  # left - code
-  tx split-window -t $1:0 -h;
+  # only create tmux session if it doesn't already exist
+  if [ "$SESSIONEXISTS" = "" ]
+  then
+    # start new session with our name
+    tmux new-session -d -s $SESSION
 
-  # top right - build
-  tmux send-keys -t $1:0.1 'npm run buildWatch' C-m
-  tx split-window -v;
+    # zsh window
+    tmux rename-window -t 0 'Main'
+    tmux send-keys -t 'Main' 'zsh' C-m 'clear' C-m # Switch to bind script?
 
-  # middle right - lint 
-  tmux send-keys -t $1:0.2 'npm run lintWatch' C-m
-  tx split-window -v;
+    # typescript build watch window
+    tmux new-window -t $SESSION:1 -n 'Build'
+    tmux send-keys -t 'Build' 'npm run buildWatch' C-m # Switch to bind script?
 
-  # bottom right - test
-  tmux send-keys -t $1:0.3 'npm run testWatch' C-m
-  tx select-layout main-vertical 
-  tx attach-session -d;
+    # typescript lint watch window
+    tmux new-window -t $SESSION:2 -n 'Lint'
+    tmux send-keys -t 'Lint' "npm run lintWatch" C-m
+
+    # typescript test watch window
+    tmux new-window -t $SESSION:3 -n 'Test'
+    tmux send-keys -t 'Test' "npm run testWatch" C-m 'clear' C-m
+  fi
+
+  # attach session on the main window
+  tmux attach-session -t $SESSION:0
 }
 
 # util 
