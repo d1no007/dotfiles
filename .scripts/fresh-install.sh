@@ -9,19 +9,18 @@ cd $HOME
 read -n "yn?install and homebrew and packages(y/n)? "
 if [[ "$yn" == [Yy] ]] ;
 then
+  # ruby
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
   brew install git
   brew install cask
   brew install vim
   brew install jq
-  brew install sox
   brew install yarn
   brew install rg
   brew install redis
   brew install zplug 
   brew install hub
-  # kuberenetes
   brew install kubernetes-cli 
   brew install kubernetes-helm
   # envsubst -- to substitute for vars for environment
@@ -45,6 +44,8 @@ then
   brew cask install slack
   brew cask intall notion
   brew cask install spotify
+  brew cask install android-sdk
+  brew cask install android-studio
 fi
 
 # dotfiles
