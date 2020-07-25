@@ -174,9 +174,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # gcloud 
-if [ -f '/Users/dinorodriguez/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dinorodriguez/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-if [ -f '/Users/dinorodriguez/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dinorodriguez/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH="/usr/local/opt/curl/bin:$PATH"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 # fzf
 # --no-ignore: Do not respect .gitignore, etc...
@@ -224,3 +223,15 @@ fi
 
 # iterm shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+###-begin-ionic-completion-###
+
+if type compdef &>/dev/null; then
+  __ionic() {
+    compadd -- $(ionic completion -- "${words[@]}" 2>/dev/null)
+  }
+
+  compdef __ionic ionic
+fi
+
+###-end-ionic-completion-###
