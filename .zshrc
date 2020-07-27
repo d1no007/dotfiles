@@ -10,8 +10,7 @@ fi
 
 ### Plugins
 # source plugin manager
-export ANTIGEN_HOME=$HOME/.antigen/antigen.zsh
-source $ANTIGEN_HOME 
+source /usr/local/share/antigen/antigen.zsh
 
 # plugins
 antigen bundle "greymd/docker-zsh-completion"
