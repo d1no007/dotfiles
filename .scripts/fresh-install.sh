@@ -15,6 +15,7 @@ then
   git config --global user.name "Dino Rodriguez"
   git config --global user.email "dinoorodriguez@gmail.com"
   git config --global credential.helper osxkeychain
+  git config --global pull.rebase true
 
   brew install tree
   brew install cask
