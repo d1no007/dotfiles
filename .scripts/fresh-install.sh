@@ -22,6 +22,7 @@ then
   brew install vim
   brew install rg
   brew install hub
+  brew install tmux 
 fi
 
 # brew - apps 
