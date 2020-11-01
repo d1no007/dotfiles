@@ -1,8 +1,7 @@
-#
-# Defines environment variables.
-#
+# Start configuration added by Zim install
+# User configuration sourced by all invocations of the shell
 
-# ensure that a non-login, non-interactive shell has a defined environment
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+# Define Zim location
+: ${ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim}
+
+# End configuration added by Zim install

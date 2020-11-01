@@ -9,6 +9,12 @@ source ~/.zshrc
 green=`tput setaf 2`
 reset=`tput sgr0`
 
+# zim
+echo "${green}updating all zsh modules..${reset}"
+zimfw upgrade
+zimfw update
+zimfw install
+
 # brew
 echo "${green}updating all homebrew packages..${reset}"
 brew update

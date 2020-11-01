@@ -1,0 +1,37 @@
+# hidden directories
+.config
+.dot
+.docker
+.npm
+.nvm
+.pm2
+.ssh
+.tmux
+.vim
+.zcompcache
+.zim
+
+# generated files
+.bash_history
+.CFUserTextEncoding
+.DS_Store
+.viminfo
+.yarnrc
+.zcompdump
+.zsh_history
+cleanUpLog
+*.log
+*.old
+*.zwc
+
+# directories
+Applications
+Code
+Desktop
+Documents
+Downloads
+Library
+Movies
+Music
+Pictures
+Public
