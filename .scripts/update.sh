@@ -27,7 +27,3 @@ brew doctor
 echo "${green}updating node and npm along with packages..${reset}"
 nvm install-latest-npm
 nvm use default
-
-# gcloud
-echo "${green}updating gcloud..${reset}"
-gcloud components update
