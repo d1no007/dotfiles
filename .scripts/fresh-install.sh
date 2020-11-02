@@ -30,7 +30,7 @@ then
   brew install tmux 
   brew install tree
   brew install vim
-	brew install yarn
+  brew install yarn
 fi
 
 # brew - apps 
