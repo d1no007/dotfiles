@@ -16,6 +16,7 @@
 .bash_history
 .CFUserTextEncoding
 .DS_Store
+.node_repl_history
 .viminfo
 .yarnrc
 .zcompdump
