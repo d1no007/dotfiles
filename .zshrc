@@ -1,28 +1,26 @@
-# Zsh configuration
-
-# zim
+#
 # Start configuration added by Zim install
+#
+export TERM=xterm
 
-#
-# History
-#
+
+# --------------------
+# Zsh configuration
+# --------------------
+
+### History
 
 # Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
 
-#
-# Input/output
-#
+### Input/output
 
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -v
-
 # Prompt for spelling correction of commands.
 setopt CORRECT
-
 # Customize spelling correction prompt.
 SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
-
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
 
@@ -31,57 +29,45 @@ WORDCHARS=${WORDCHARS//[\/]}
 # Module configuration
 # --------------------
 
-#
-# completion
-#
+### completion
 
 # Set a custom path for the completion dump file.
 # If none is provided, the default ${ZDOTDIR:-${HOME}}/.zcompdump is used.
 zstyle ':zim:completion' dumpfile "${ZDOTDIR:-${HOME}}/.zcompdump-${ZSH_VERSION}"
 
-#
-# git
-#
+### git
 
 # Set a custom prefix for the generated aliases. The default prefix is 'G'.
 # zstyle ':zim:git' aliases-prefix 'g'
 
-#
-# input
-#
+### input
 
 # Append `../` to your input for each `.` you type after an initial `..`
 zstyle ':zim:input' double-dot-expand yes
 
-#
-# termtitle
-#
+### termtitle
 
 # Set a custom terminal title format using prompt expansion escape sequences.
 # See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
 # If none is provided, the default '%n@%m: %~' is used.
 zstyle ':zim:termtitle' format '%1~'
 
-#
-# zsh-autosuggestions
-#
+### zsh-autosuggestions
 
 # Customize the style that the suggestions are shown with.
 # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 
-#
-# zsh-syntax-highlighting
-#
+### zsh-syntax-highlighting
 
 # Set what highlighters will be used.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
 # Customize the main highlighter styles.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=10'
+
 
 # ------------------
 # Initialize modules
@@ -93,18 +79,16 @@ if [[ ${ZIM_HOME}/init.zsh -ot ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 source ${ZIM_HOME}/init.zsh
 
+
 # ------------------------------
 # Post-init module configuration
 # ------------------------------
 
-#
-# zsh-history-substring-search
-#
+### zsh-history-substring-search
 
 # Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-
 # Bind up and down keys
 zmodload -F zsh/terminfo +p:terminfo
 if [[ -n ${terminfo[kcuu1]} && -n ${terminfo[kcud1]} ]]; then
@@ -117,9 +101,11 @@ bindkey '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+#
 # End configuration added by Zim install
+#
 
-# lazy load nvm, node, and npm on first use
+### nvm, node, and npm (lazy load)
 nvm() {
     unset -f nvm
     export NVM_DIR=~/.nvm
@@ -141,8 +127,7 @@ npm() {
     npm "$@"
 }
 
-# pm2
-# Installation: pm2 completion >> ~/.bashrc  (or ~/.zshrc)
+### pm2
 COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
 COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
 export COMP_WORDBREAKS
@@ -176,5 +161,4 @@ elif type compctl &>/dev/null; then
   }
   compctl -K _pm2_completion + -f + pm2
 fi
-
-# end pm2 completion
+### end pm2 completion

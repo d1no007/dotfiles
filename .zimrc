@@ -1,6 +1,9 @@
+#
 # Start configuration added by Zim install
+#
 
-# Modules
+
+### Modules
 
 # Sets sane Zsh built-in environment options.
 zmodule environment
@@ -18,7 +21,7 @@ zmodule termtitle
 zmodule utility
 
 
-# Prompt
+### Prompt
 
 # Exposes git repository status information to prompts.
 zmodule git-info
@@ -27,7 +30,7 @@ zmodule git-info
 zmodule minimal 
 
 
-# Completion
+### Completion
 
 # Additional completion definitions for Zsh.
 zmodule zsh-users/zsh-completions
@@ -47,5 +50,7 @@ zmodule zsh-users/zsh-syntax-highlighting
 # zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
 
-# End configuration added by Zim install
 
+#
+# End configuration added by Zim install
+#
