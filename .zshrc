@@ -1,27 +1,7 @@
 #
-# Executes commands at the start of an interactive session.
+# Aliases/Commands 
 #
 
-### Prezto
-# source prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-### Plugins
-# source plugin manager
-source /usr/local/share/antigen/antigen.zsh
-
-# plugins
-antigen bundle "greymd/docker-zsh-completion"
-antigen bundle "zsh-users/zsh-history-substring-search"
-antigen bundle "lukechilds/zsh-better-npm-completion"
-antigen bundle "glidenote/hub-zsh-completion"
-antigen bundle "nnao45/zsh-kubectl-completion"
-
-antigen apply
-
-### Aliases/Commands
 # dotfiles (git alias)
 alias dot='/usr/bin/git --git-dir=$HOME/.dot/ --work-tree=$HOME'
 
@@ -100,8 +80,8 @@ tx3() {
   tmux -2 attach-session -d; 
 }
 
-# Adapted from : http://ryan.himmelwright.net/post/scripting-tmux-workspaces/
 # Typescript development set up
+# Adapted from : http://ryan.himmelwright.net/post/scripting-tmux-workspaces/
 ts-init() {
   # set session name
   SESSION=$1
@@ -142,48 +122,116 @@ alias timestamp='date -u "+%Y-%m-%dT%H:%M:%S"'
 alias vinstall='vim +PluginInstall +qall'
 alias v='vim'
 
-### Completion and PATH
-# hydra
-export TS_CONFIG_PATH="$HOME/Code/hydra/scripts/init/config.json"
 
-# rust
-fpath+=~/.zfunc
+#
+# <> Start zsh configuration
+#
+#
 
-# docker
-autoload -Uz compinit; compinit
+### History
 
-# kubectl
-if [ $commands[kubectl] ]; then
-  source <(kubectl completion zsh)
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
+
+### Input/output
+
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -v
+# Prompt for spelling correction of commands.
+setopt CORRECT
+# Customize spelling correction prompt.
+SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+
+
+# 
+# Module configuration
+# 
+
+### completion
+
+# Set a custom path for the completion dump file.
+# If none is provided, the default ${ZDOTDIR:-${HOME}}/.zcompdump is used.
+zstyle ':zim:completion' dumpfile "${ZDOTDIR:-${HOME}}/.zcompdump-${ZSH_VERSION}"
+
+### git
+
+# Set a custom prefix for the generated aliases. The default prefix is 'G'.
+# zstyle ':zim:git' aliases-prefix 'g'
+
+### input
+
+# Append `../` to your input for each `.` you type after an initial `..`
+zstyle ':zim:input' double-dot-expand yes
+
+### termtitle
+
+# Set a custom terminal title format using prompt expansion escape sequences.
+# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
+# If none is provided, the default '%n@%m: %~' is used.
+zstyle ':zim:termtitle' format '%1~'
+
+### zsh-autosuggestions
+
+# Customize the style that the suggestions are shown with.
+# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+
+### zsh-syntax-highlighting
+
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+# Customize the main highlighter styles.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]='fg=10'
+
+
+#
+# Initialize modules
+#
+
+if [[ ${ZIM_HOME}/init.zsh -ot ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  # Update static initialization script if it's outdated, before sourcing it
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+source ${ZIM_HOME}/init.zsh
+
+
+#
+# Post-init module configuration
+#
+
+### zsh-history-substring-search
+
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+# Bind up and down keys
+zmodload -F zsh/terminfo +p:terminfo
+if [[ -n ${terminfo[kcuu1]} && -n ${terminfo[kcud1]} ]]; then
+  bindkey ${terminfo[kcuu1]} history-substring-search-up
+  bindkey ${terminfo[kcud1]} history-substring-search-down
 fi
 
-# helm
-if [ $commands[helm] ]; then
-  source <(helm completion zsh)
-fi
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
-# minikube
-if [ $commands[minikube] ]; then
-  source <(minikube completion zsh)
-fi
+#
+# <> End zsh configuration
+#
+
+#
+# Completions
+#
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# gcloud 
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-
-# fzf
-# --no-ignore: Do not respect .gitignore, etc...
-# --hidden: Search hidden files and folders
-# --follow: Follow symlinks
-# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_OPTS='--no-height --no-reverse'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 # pm2
 COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
@@ -219,18 +267,4 @@ elif type compctl &>/dev/null; then
   }
   compctl -K _pm2_completion + -f + pm2
 fi
-
-# iterm shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-###-begin-ionic-completion-###
-
-if type compdef &>/dev/null; then
-  __ionic() {
-    compadd -- $(ionic completion -- "${words[@]}" 2>/dev/null)
-  }
-
-  compdef __ionic ionic
-fi
-
-###-end-ionic-completion-###
+### end pm2 completion

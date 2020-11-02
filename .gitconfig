@@ -1,0 +1,7 @@
+[user]
+	name = Dino Rodriguez
+	email = dinoorodriguez@gmail.com
+[credential]
+	helper = osxkeychain
+[pull]
+	rebase = true
