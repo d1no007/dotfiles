@@ -5,7 +5,7 @@
 
 cd $HOME 
 
-# settings
+# general - settings
 # remove workspace auto-switching
 defaults write com.apple.dock workspaces-auto-swoosh -bool NO
 killall Dock
@@ -17,7 +17,6 @@ read -n "yn?install and homebrew and packages(y/n)? "
 if [[ "$yn" == [Yy] ]] ;
 then
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
 
   brew install git
   git config --global user.name "Dino Rodriguez"
