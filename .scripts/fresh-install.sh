@@ -64,6 +64,14 @@ then
   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 fi
 
+# stronghold 
+read -n "yn?run stronghold security script(y/n)? "
+if [[ "$yn" == [Yy] ]] ;
+then
+  pip3 install stronghold
+  stronghold
+fi
+
 # node
 read -n "yn?install nvm/node(y/n)? "
 if [[ "$yn" == [Yy] ]] ;
