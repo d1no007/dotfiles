@@ -20,7 +20,6 @@ echo "${green}updating all homebrew packages..${reset}"
 brew update
 brew upgrade
 brew cleanup
-brew prune 
 brew doctor
 
 # node 
