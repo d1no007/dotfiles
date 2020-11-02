@@ -2,6 +2,10 @@
 set nocompatible
 filetype off
 
+"yanks to system clipboard
+"paste with `p` or `cmd-v`
+set clipboard=unnamed
+
 "set the runtime path to include Vundle and initialize 
 set rtp+=~/.vim/bundle/Vundle.vim
 
