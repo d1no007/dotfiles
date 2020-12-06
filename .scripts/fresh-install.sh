@@ -85,7 +85,7 @@ then
   read -n "yn?install global packages(y/n)? "
   if [[ "$yn" == [Yy] ]] ;
   then
-    yarn global add typescript pm2
+    yarn global add typescript pm2 vim-language-server
     pm2 completion install
   fi
 fi

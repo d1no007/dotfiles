@@ -124,8 +124,7 @@ alias v='vim'
 
 
 #
-# <> Start zsh configuration
-#
+# -> Start zsh configuration
 #
 
 ### History
@@ -222,7 +221,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 #
-# <> End zsh configuration
+# -> End zsh configuration
 #
 
 #

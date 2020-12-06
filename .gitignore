@@ -1,5 +1,6 @@
 # hidden directories
 .config
+.cups
 .dot
 .docker
 .npm
@@ -33,6 +34,7 @@ Code
 Desktop
 Documents
 Downloads
+Google Drive File Stream
 Library
 Movies
 Music
