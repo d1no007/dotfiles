@@ -99,15 +99,15 @@ ts-init() {
 
     # typescript build watch window
     tmux new-window -t $SESSION:1 -n 'Build'
-    tmux send-keys -t 'Build' 'npm run buildWatch' C-m # Switch to bind script?
+    tmux send-keys -t 'Build' 'yarn run buildWatch' C-m # Switch to bind script?
 
     # typescript lint watch window
     tmux new-window -t $SESSION:2 -n 'Lint'
-    tmux send-keys -t 'Lint' "npm run lintWatch" C-m
+    tmux send-keys -t 'Lint' "yarn run lintWatch" C-m
 
     # typescript test watch window
     tmux new-window -t $SESSION:3 -n 'Test'
-    tmux send-keys -t 'Test' "npm run testWatch" C-m 'clear' C-m
+    tmux send-keys -t 'Test' "yarn run testWatch" C-m 'clear' C-m
   fi
 
   # attach session on the main window
